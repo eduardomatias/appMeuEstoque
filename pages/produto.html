@@ -1,0 +1,76 @@
+<!-- Top Navbar-->
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link">
+                <i class="icon icon-back"></i>
+                <span></span>
+            </a>
+        </div>
+        <div class="center sliding">Produto</div>
+        <div class="right">
+            <a href="#" class="link icon-only open-modal">
+                <i class="fa fa-2x fa-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="pages">
+    <!-- Page, data-page contains page name-->
+    <div data-page="produto" class="page">
+        <!-- Scrollable page content-->
+        <div class="page-content infinite-scroll">
+            <div id="produto" class="list-block"></div>
+            <div class="my-modal" id="modalFormProduto">
+                <form action="" method="get" accept-charset="utf-8" class="form-custom">
+                    <div class="content-block-title">Novo produto</div>
+                    <div class="list-block no-hairlines-between no-hairlines">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner"> 
+                                        <div class="item-title label">
+                                            <div class="item-media"><i class="fa fa-inbox" aria-hidden="true"></i>Produto</div>
+                                        </div>
+                                        <div class="item-input">
+                                            <input type="text" name="TBL02_NOME" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner"> 
+                                        <div class="item-title label">
+                                            <div class="item-media"><i class="fa fa-check-circle" aria-hidden="true"></i>Ativo</div>
+                                        </div>
+                                        <div class="item-input">
+                                            <select name="TBL02_ATIVO">
+                                                <option value="1">Sim</option>
+                                                <option value="0">Não</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content width-50p">
+                                    <div class="item-inner">
+                                        <input type="button" value="cancelar" class="button button-big button-fill color-red close-modal"/>
+                                    </div>
+                                </div>
+                                <div class="item-content width-50p">
+                                    <div class="item-inner">
+                                        <input type="submit" value="salvar" class="button button-big button-fill color-green"/>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
