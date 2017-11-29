@@ -33,10 +33,10 @@ class LoadPage {
 
     produto(page) {
         // listview
-        myApp.c.listView ('produto.php', {}, 'produto', function (a) {
+        myApp.c.listView ('produtoList.php', myApp.c.getLocalStorage(), 'produto', function (a) {
             
         }, true, false);
-
+		
         // acoes do modal-form
         $('.open-modal').on('click', function(){
             myApp.c.openModal('modalFormProduto');
@@ -44,6 +44,16 @@ class LoadPage {
         $('.close-modal').on('click', function(){
             myApp.c.closeModal('modalFormProduto');
         });
+		
+		// obj form
+		var formProduto = new Form('form-produto');		
+		// evento de submit
+		$$(formProduto.form).on('submit', function () {
+			myApp.c.ajaxApi ('produtoSave.php', $.extend({},formProduto.getFormData(),myApp.c.getLocalStorage()), function (a) {
+				console.log(a);
+			});
+		});
+		
     }
 
     fornecedor(page) {
