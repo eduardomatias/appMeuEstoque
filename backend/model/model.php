@@ -70,10 +70,12 @@ class Model {
 	*
 	* @author Eduardo Matias 
 	* @param $where string clausula where do sql
+	* @param $order string campos order by do sql
+	* @param $limit string quantidade de linhas de retorno do sql
 	* @return string
 	*/
-    public function find($where = "") {
-        $sql = "SELECT * FROM " . $this::tableSchema() . "." . $this::tableName() . (!$where ? "" : " WHERE " . $where);
+    public function find($where = "", $order = null, $limit = null) {
+        $sql = "SELECT * FROM " . $this::tableSchema() . "." . $this::tableName() . (!$where ? "" : " WHERE " . $where) . (!$order ? "" : " ORDER BY " . $order) . (!$limit ? "" : " LIMIT 0," . (int) $limit);
         return $this->db->queryAssoc($sql);
 	}
 	
@@ -143,6 +145,8 @@ class Model {
 					// throw new Exception($exec);
 					throw new Exception('PDO: Erro inesperado, tente novamente.');
 				}
+				// add id inserido/alterado
+				$this->setAttributes(array($pkName => $this->lastId));
 				$return = array('status' => true, 'return' => array_merge($this->attributes, $this->attributesSet));
 				// clear attributes
 				$this->attributesModel();
@@ -179,8 +183,10 @@ class Model {
 				if (!@$query->execute()) {
 					throw new Exception($query->errorInfo());
 				}
+				$this->lastId = $this->db->lastInsertId();
+			} else {
+				$this->lastId = null;				
 			}
-			$this->lastId = $query->lastInsertId();
 			$return = true;
 		} catch (Exception $ex) {
 			$return = $ex->getMessage();
@@ -220,7 +226,6 @@ class Model {
 		}
 		return $return;
 	}
-	
 	
 	/**
 	* formatAttrSqlBind

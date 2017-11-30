@@ -1,10 +1,5 @@
 <?php
 
-	error_reporting(E_ALL);
-	ini_set('display_errors',1);
-	oci_internal_debug(1);
-
-	
 	include_once dirname(__FILE__) . '/model.php';
 	class Empresa extends Model {
 		

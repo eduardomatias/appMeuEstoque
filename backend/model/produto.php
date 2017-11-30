@@ -1,9 +1,4 @@
 <?php
-
-	error_reporting(E_ALL);
-	ini_set('display_errors',1);
-	oci_internal_debug(1);
-
 	
 	include_once dirname(__FILE__) . '/model.php';
 	class Produto extends Model {
@@ -66,12 +61,14 @@
 					'required', 
 					array(
 						'TBL02_NOME',
-						'TBL02_ID_EMPRESA'
+						'TBL02_ID_EMPRESA',
+						'TBL02_ATIVO'
 					)
 				)
 			);
 		}
 	}
+	
 	/*
 	
 	$db = new Conexao();

@@ -1,11 +1,11 @@
 <div class="item-inner">
     <div class="item-title">
-        <i class="fa fa-arrow-circle-{{#if tipo}}down color-green{{else}}up color-red{{/if}}"></i> {{produto}} 
+        <i class="fa fa-arrow-circle-{{#if tipo}}up color-green{{else}}down color-red{{/if}}"></i> {{produto}} 
         <br />
         <small>{{fornecedor}}</small>
     </div>
     <div class="item-after">
-        <span class="badge qtd-produto">{{qtd}}</span>
-        <span class="badge vlr-produto">{{vlr}}</span>
+        <span class="qtd-produto"><strong>{{qtd}}</strong></span>
+        <span class="vlr-produto {{#js_if "this.vlr < 0"}}color-red{{else}}color-green{{/js_if}}">R$ {{real vlr}}</span>
     </div>
 </div>

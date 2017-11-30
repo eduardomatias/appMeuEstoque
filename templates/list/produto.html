@@ -1,11 +1,17 @@
 <div class="item-inner">
     <div class="item-title">
-        <i class="fa fa-inbox"></i> {{produto}} 
+        <i class="fa fa-inbox"></i> {{TBL02_NOME}}
         <br />
-        <small>Estoque: <strong>{{qtd}}</strong></small>
+        <small>Status:
+			{{#js_if "this.TBL02_ATIVO == 1"}}
+				<strong class="color-green">Ativo</strong>
+			{{else}} 
+				<strong class="color-red">Inativo</strong>
+			{{/js_if}}
+		</small>
     </div>
     <div class="item-after">
-        <a href="#" class="link">
+        <a href="#" class="link action-editar-produto" data-produto='{"TBL02_ID":{{TBL02_ID}},"TBL02_NOME":"{{TBL02_NOME}}","TBL02_ATIVO":{{TBL02_ATIVO}}}'>
             <i class="fa fa-edit"></i>            
         </a>
     </div>

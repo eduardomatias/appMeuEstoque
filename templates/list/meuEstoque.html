@@ -2,10 +2,8 @@
     <div class="item-title">
         {{produto}} 
         <br />
-        <small>{{fornecedor}}</small>
-    </div>
-    <div class="item-after">
-        <span class="badge qtd-produto">{{qtd}}</span>
-        <span class="badge vlr-produto">{{vlr}}</span>
+        <small>
+			Qtd.: <strong {{#js_if "this.qtd < 10"}}class="color-red"{{/js_if}}>{{qtd}}</strong>
+		</small>
     </div>
 </div>
