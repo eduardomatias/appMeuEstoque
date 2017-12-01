@@ -10,7 +10,7 @@
 		* @return string
 		*/
 		public static function tableSchema() {
-			return 'meuestoque';
+			return 'MEUESTOQUE';
 		}
 		
 		/**
@@ -20,7 +20,7 @@
 		* @return string
 		*/
 		public static function tableName() {
-			return 'tbl02_produto';
+			return 'TBL02_PRODUTO';
 		}
 		
 		/**

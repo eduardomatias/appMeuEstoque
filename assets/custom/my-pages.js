@@ -17,17 +17,43 @@ class LoadPage {
     }
 
     movimentacao(page) {
+        // localStorage do app
+        var lg = myApp.c.getLocalStorage();
+        // obj form
+        var formMovimentacao = new Form('form-movimentacao'); 
+
+        // combo produtos 
+        myApp.c.ajaxApi ('combo.php', {t: 'TBL02_PRODUTO', e:lg.TBL01_ID}, function (a) {
+            formMovimentacao.addOptionsSelect('TBL04_ID_PRODUTO', a);
+        });
+
         // listview
-        myApp.c.listView ('movimentacao.php', {}, 'movimentacao', function (a) {
-            
+        myApp.c.listView ('movimentacaoList.php', lg, 'movimentacao', function (a) { 
+
         }, false, true);
 
         // acoes do modal-form
         $('.open-modal').on('click', function(){
+            formMovimentacao.clear();
             myApp.c.openModal('modalFormMovimentacao');
         });
+        
+        // fechar modal-form
         $('.close-modal').on('click', function(){
             myApp.c.closeModal('modalFormMovimentacao');
+        });
+
+        // evento de submit do form
+        $$(formMovimentacao.form).on('submit', function () {
+            var formData = formMovimentacao.getFormData();
+            myApp.c.ajaxApi ('movimentacaoSave.php', $.extend({TBL04_ID_EMPRESA: lg.TBL01_ID},formData), function (a) {
+                // limpa o campo do form
+                formMovimentacao.clear();
+                // foca no campo nome
+                formMovimentacao.TBL04_ID_PRODUTO.focus();
+                // add o item na lista
+                myApp.c.appendListView.movimentacao([a]);
+            });
         });
     }
 

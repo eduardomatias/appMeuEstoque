@@ -1,7 +1,7 @@
 <?php
-
+	
 	include_once dirname(__FILE__) . '/model.php';
-	class Empresa extends Model {
+	class Movimentacao extends Model {
 		
 		/**
 		* tableSchema
@@ -20,7 +20,7 @@
 		* @return string
 		*/
 		public static function tableName() {
-			return 'TBL01_EMPRESA';
+			return 'TBL04_MOVIMENTACAO';
 		}
 		
 		/**
@@ -30,7 +30,7 @@
 		* @return string
 		*/
 		public static function primaryKey() {
-			return 'TBL01_ID';
+			return 'TBL04_ID';
 		}
 		
 		/**
@@ -41,11 +41,14 @@
 		*/
 		public static function attributeLabel() {
 			return array(
-				'TBL01_ID' => 'ID',
-				'TBL01_NOME' => 'NOME',
-				'TBL01_CNPJ' => 'CNPJ/CPF',
-				'TBL01_SENHA' => 'SENHA',
-				'TBL01_ATIVO' => 'ATIVO'
+				'TBL04_ID' => 'ID',
+				'TBL04_TIPO' => 'TIPO',
+				'TBL04_ID_PRODUTO' => 'PRODUTO',
+				'TBL04_ID_FORNECEDOR' => 'FORNECEDOR',
+				'TBL04_ID_EMPRESA' => 'EMPRESA',
+				'TBL04_QTD' => 'QTD',
+				'TBL04_CUSTO_TOTAL' => 'VALOR',
+				'TBL04_DATA' => 'DATA'
 			);
 		}
 		
@@ -61,15 +64,25 @@
 				array(
 					'required', 
 					array(
-						'TBL01_NOME',
-						'TBL01_CNPJ',
-						'TBL01_SENHA',
-						'TBL01_ATIVO'
+						'TBL04_TIPO',
+						'TBL04_ID_PRODUTO',
+						'TBL04_ID_FORNECEDOR',
+						'TBL04_ID_EMPRESA',
+						'TBL04_QTD',
+						'TBL04_CUSTO_TOTAL',
+						'TBL04_DATA'
+					)
+				),
+				array(
+					'dateBR', 
+					array(
+						'TBL04_DATA'
 					)
 				)
 			);
 		}
 	}
+	
 	/*
 	
 	$db = new Conexao();

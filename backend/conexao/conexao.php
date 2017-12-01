@@ -4,7 +4,7 @@ class Conexao extends PDO {
 
 	const serve = 'localhost';
 	const port = '3306';
-	const dbname = 'meuestoque';
+	const dbname = 'MEUESTOQUE';
 	const user = 'root';
 	const pass = '';
 

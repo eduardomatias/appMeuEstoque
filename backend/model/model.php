@@ -132,7 +132,7 @@ class Model {
 			$pkName = $this::primaryKey();
 			
 			// acao
-			$action = (array_key_exists($pkName, $this->attributesSet)) ? 'update' : 'insert';
+			$action = !empty($this->attributesSet[$pkName]) ? 'update' : 'insert';
 			
 			// valida atributos do modelo
 			$valido = ($validate) ? $this->validate($action) : true;
@@ -443,6 +443,28 @@ class Validate {
 		return $return;
 	}
 	
+	public function dateBR ($attr, $options) {
+		$return = true;
+		if (array_key_exists($attr, $this->attributes) && $this->attributes[$attr] != '') {
+			// test: formato da data
+			if (@preg_match('/^[0-9]{2}/[0-9]{2}/[0-9]{4}$/', $this->attributes[$attr])) {
+				$return = $this->message('A data no campo "{attribute}" não é válida.', $attr, $options);
+				
+			// test: data menor que (teste acontece no primeiro parametro do teste)
+			} else if(array_key_exists('<', $options) && !empty($options['<'][0]) && !empty($options['<'][1]) && $options['<'][0] == $attr){
+				$attr1 = $options['<'][0];
+				$attr2 = $options['<'][1];
+				$data_1 = DateTime::createFromFormat('d/m/Y', $this->attributes[$attr1]);
+				$data_2 = DateTime::createFromFormat('d/m/Y', $this->attributes[$attr2]);
+				if($data_1 >= $data_2) {
+					$return = 'A data "' . (array_key_exists($attr1, $this->attributeLabel) ? $this->attributeLabel[$attr1] : $attr1) . '" ';
+					$return .= 'tem que ser menor que a data "' . (array_key_exists($attr2, $this->attributeLabel) ? $this->attributeLabel[$attr2] : $attr2) . '".';					
+				}
+			}
+		}
+		return $return;
+	}
+
 	public function datetimeBR ($attr, $options) {
 		$return = true;
 		if (array_key_exists($attr, $this->attributes) && $this->attributes[$attr] != '') {
