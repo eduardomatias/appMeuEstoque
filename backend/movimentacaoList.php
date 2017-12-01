@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
     $empresa = !empty($_POST['TBL01_ID']) ? $_POST['TBL01_ID'] : false;
     if(!$empresa){
         $return = false;
@@ -9,7 +13,7 @@
         include_once 'model/movimentacao.php';
         $db = new Conexao();
         $model = new Movimentacao($db);
-        $return = $model->find('TBL04_ID_EMPRESA = ' . $empresa . ' AND TBL04_ATIVO = 1', 'TBL04_DATA DESC');
+		$return = $model->getMovimentacao($empresa);
         if (!$return) {
             $return = array('error' => 'Nenhuma movimentação cadastrada.');
         }

@@ -167,6 +167,8 @@ var Form = function (formId) {
                     case 'select-multiple':
                     case 'select-one':
                     case 'text':
+                    case 'number':
+                    case 'email':
                     case 'textarea':
                         input[i].value = '';
                         break;

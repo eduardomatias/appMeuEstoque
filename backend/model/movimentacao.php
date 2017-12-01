@@ -78,11 +78,38 @@
 					array(
 						'TBL04_DATA'
 					)
+				),
+				array(
+					'integer', 
+					array(
+						'TBL04_QTD'
+					)
 				)
 			);
 		}
+		
+		/**
+		* getMovimentacao
+		* retorna as movimentacoes da empresa
+		*
+		* @author Eduardo Matias 
+		* @return array
+		*/
+		public function getMovimentacao($empresa) {
+			$tableSchema = $this::tableSchema();
+			$tableName = $this::tableName();
+			$sql = "
+				SELECT TBL02_NOME AS PRODUTO, TBL03_NOME AS FORNECEDOR, " . $tableName . ".*
+				FROM " . $tableSchema . "." . $tableName . "
+				INNER JOIN $tableSchema.TBL02_PRODUTO ON (TBL02_ID = TBL04_ID_PRODUTO)
+				INNER JOIN $tableSchema.TBL03_FORNECEDOR ON (TBL03_ID = TBL04_ID_FORNECEDOR)
+				WHERE TBL04_ID_EMPRESA = ?
+				ORDER BY TBL04_DATA DESC";
+			return $this->db->queryAssoc($sql, array($empresa));
+		}
+		
 	}
-	
+		
 	/*
 	
 	$db = new Conexao();

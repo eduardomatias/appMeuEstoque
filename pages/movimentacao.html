@@ -23,7 +23,7 @@
         <div class="page-content infinite-scroll">
             <div id="movimentacao" class="list-block"></div>
             <div class="my-modal" id="modalFormMovimentacao">
-                <form action="" method="get" accept-charset="utf-8" class="form-custom" id="form-movimentacao">
+                <form action="#" onsubmit="return false" method="get" accept-charset="utf-8" class="form-custom" id="form-movimentacao">
                     <div class="content-block-title">Nova movimentação</div>
                     <div class="list-block no-hairlines-between no-hairlines">
                         <ul>
@@ -50,13 +50,6 @@
                                         <div class="item-input">
                                             <select name="TBL04_ID_FORNECEDOR">
                                                 <option>selecione...</option>
-                                                <option>Fornecedor yyyyy</option>
-                                                <option>Fornecedor yyyyy</option>
-                                                <option>Fornecedor yyyyy</option>
-                                                <option>Fornecedor yyyyy</option>
-                                                <option>Fornecedor yyyyy</option>
-                                                <option>Fornecedor yyyyy</option>
-                                                <option>Fornecedor yyyyy</option>
                                             </select>
                                         </div>
                                     </div>
@@ -102,10 +95,10 @@
                                 <div class="item-content width-50p">
                                     <div class="item-inner"> 
                                         <div class="item-title label">
-                                            <div class="item-media"><i class="fa fa-money" aria-hidden="true"></i>Custo</div>
+                                            <div class="item-media"><i class="fa fa-money" aria-hidden="true"></i>Valor</div>
                                         </div>
                                         <div class="item-input">
-                                            <input type="text" name="TBL04_CUSTO_TOTAL" placeholder="" class="money" id="money" pattern="\d*" />
+                                            <input type="text" name="TBL04_CUSTO_TOTAL" placeholder="" id="money" />
                                         </div>
                                     </div>
                                 </div>

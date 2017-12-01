@@ -239,6 +239,9 @@ class Model {
 			case 'TIMESTAMP(6)':
 				$a = "TO_TIMESTAMP(:" . $attr . ",'DD/MM/YYYY HH24:MI')";
 			break;
+			case 'date':
+				$a = "STR_TO_DATE(:" . $attr . ",'%d/%m/%Y')";
+			break;
 			default:
 				$a = ":" . $attr;
 			break;
@@ -482,6 +485,28 @@ class Validate {
 					$return = 'A data "' . (array_key_exists($attr1, $this->attributeLabel) ? $this->attributeLabel[$attr1] : $attr1) . '" ';
 					$return .= 'tem que ser menor que a data "' . (array_key_exists($attr2, $this->attributeLabel) ? $this->attributeLabel[$attr2] : $attr2) . '".';					
 				}
+			}
+		}
+		return $return;
+	}
+	
+	public function integer ($attr, $options) {
+		$return = true;
+		if (array_key_exists($attr, $this->attributes) && $this->attributes[$attr] != '') {
+			// test: valor inteiro
+			if (@preg_match('/[^0-9]/', $this->attributes[$attr])) {
+				$return = $this->message('O campo "{attribute}" deve ser inteiro.', $attr, $options);
+			}
+		}
+		return $return;
+	}
+	
+	public function email ($attr, $options) {
+		$return = true;
+		if (array_key_exists($attr, $this->attributes) && $this->attributes[$attr] != '') {
+			// test: email
+			if (@preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $this->attributes[$attr])) {
+				$return = $this->message('O e-mail no campo "{attribute}" não é válido.', $attr, $options);
 			}
 		}
 		return $return;

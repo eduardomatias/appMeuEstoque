@@ -18,6 +18,12 @@
 	        	$label = 'TBL02_NOME';
 	        	$where = 'TBL02_ID_EMPRESA = ' . (int) $empresa . ' AND TBL02_ATIVO = 1';
         		break;
+				
+        	case 'TBL03_FORNECEDOR':
+	        	$id = 'TBL03_ID';
+	        	$label = 'TBL03_NOME';
+	        	$where = 'TBL03_ID_EMPRESA = ' . (int) $empresa . ' AND TBL03_ATIVO = 1';
+        		break;
         	
         	default:
         		$tabela = false;

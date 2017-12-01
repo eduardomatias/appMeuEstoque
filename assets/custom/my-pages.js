@@ -20,17 +20,23 @@ class LoadPage {
         // localStorage do app
         var lg = myApp.c.getLocalStorage();
         // obj form
-        var formMovimentacao = new Form('form-movimentacao'); 
-
-        // combo produtos 
-        myApp.c.ajaxApi ('combo.php', {t: 'TBL02_PRODUTO', e:lg.TBL01_ID}, function (a) {
+        var formMovimentacao = new Form('form-movimentacao');
+		formMovimentacao.setMoney(['TBL04_CUSTO_TOTAL']);
+		
+		// combo produtos 
+        myApp.c.ajaxApi ('combo.php', {t:'TBL02_PRODUTO', e:lg.TBL01_ID}, function (a) {
             formMovimentacao.addOptionsSelect('TBL04_ID_PRODUTO', a);
+			
+			// combo fornecedor
+			myApp.c.ajaxApi ('combo.php', {t:'TBL03_FORNECEDOR', e:lg.TBL01_ID}, function (a) {
+				formMovimentacao.addOptionsSelect('TBL04_ID_FORNECEDOR', a);
+					
+				// listview movimentacao
+				myApp.c.listView ('movimentacaoList.php', lg, 'movimentacao', function (a) { 
+					// @TODO add opcao de desativacao da movimentacao
+				}, false, true);
+			});
         });
-
-        // listview
-        myApp.c.listView ('movimentacaoList.php', lg, 'movimentacao', function (a) { 
-
-        }, false, true);
 
         // acoes do modal-form
         $('.open-modal').on('click', function(){
@@ -49,8 +55,6 @@ class LoadPage {
             myApp.c.ajaxApi ('movimentacaoSave.php', $.extend({TBL04_ID_EMPRESA: lg.TBL01_ID},formData), function (a) {
                 // limpa o campo do form
                 formMovimentacao.clear();
-                // foca no campo nome
-                formMovimentacao.TBL04_ID_PRODUTO.focus();
                 // add o item na lista
                 myApp.c.appendListView.movimentacao([a]);
             });
