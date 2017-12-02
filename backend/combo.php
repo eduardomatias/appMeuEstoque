@@ -1,4 +1,7 @@
 <?php
+    
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
 
 $empresa = !empty($_POST['e']) ? $_POST['e'] : false;
 $tabela = !empty($_POST['t']) ? strtoupper($_POST['t']) : false;

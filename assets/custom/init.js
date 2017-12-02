@@ -5,8 +5,8 @@ myApp.c.setAppConfig({
     appSlogan: 'tudo sob controle',
     pages: ['meuEstoque', 'movimentacao', 'produto', 'fornecedor', 'perfil'],
     indexPage: 'meuEstoque.html',
-    urlApi: './backend/',
-    urlImg: './backend/img/'
+    urlApi: 'http://softmaxi.com.br/e/backend/',
+    urlImg: 'http://softmaxi.com.br/e/backend/'
 });
 
 myApp.c.setPanelLeft([

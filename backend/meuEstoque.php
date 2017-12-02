@@ -1,4 +1,7 @@
 <?php
+	
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
 
 $empresa = !empty($_POST['TBL01_ID']) ? $_POST['TBL01_ID'] : false;
 if (!$empresa) {

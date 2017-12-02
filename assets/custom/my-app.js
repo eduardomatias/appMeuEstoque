@@ -414,6 +414,7 @@ myApp.c.ajaxApi = function (method, params, callback) {
     var ajaxParams = {};
     ajaxParams.type = 'POST';
     ajaxParams.dataType = 'json';
+    ajaxParams.crossDomain = true;
     ajaxParams.data = (params || {});
     ajaxParams.url = this.appConfig.urlApi + method;
     ajaxParams.timeout = 7000;

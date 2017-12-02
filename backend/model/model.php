@@ -161,6 +161,10 @@ class Model {
     public function insert() {
         try {
             if ($this->attributesSet) {
+                $pkName = $this::primaryKey();
+                if (array_key_exists($pkName, $this->attributesSet)) {
+                    unset($this->attributesSet[$pkName]);
+                }
                 $colunas = array_keys($this->attributesSet);
                 $valores = array_values($this->attributesSet);
                 $colunasInsert = array();
@@ -173,7 +177,7 @@ class Model {
                     $query->bindParam(":" . $c, $valores[$k], PDO::PARAM_STR, strlen($valores[$k]));
                 }
                 if (!@$query->execute()) {
-                    throw new Exception($query->errorInfo());
+                    throw new Exception($query->errorInfo()[2]);
                 }
                 $this->lastId = $this->db->lastInsertId();
             } else {
@@ -208,7 +212,7 @@ class Model {
                     $query->bindParam(":" . $c, $valores[$k], PDO::PARAM_STR, strlen($valores[$k]));
                 }
                 if (!@$query->execute()) {
-                    throw new Exception($query->errorInfo());
+                    throw new Exception($query->errorInfo()[2]);
                 }
             }
             $this->lastId = $pk;
