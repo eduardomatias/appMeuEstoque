@@ -11,9 +11,11 @@ class LoadPage {
     }
     
     meuEstoque(page) {
-        myApp.c.listView ('meuEstoque.php', {}, 'meuEstoque', function (a) {
+        // localStorage do app
+        var lg = myApp.c.getLocalStorage();
+        myApp.c.listView ('meuEstoque.php', lg, 'meuEstoque', function (a) {
             
-        }, true, false);
+        }, false, true);
     }
 
     movimentacao(page) {
@@ -21,21 +23,21 @@ class LoadPage {
         var lg = myApp.c.getLocalStorage();
         // obj form
         var formMovimentacao = new Form('form-movimentacao');
-		formMovimentacao.setMoney(['TBL04_CUSTO_TOTAL']);
+        formMovimentacao.setMoney(['TBL04_CUSTO_TOTAL']);
 		
-		// combo produtos 
+        // combo produtos 
         myApp.c.ajaxApi ('combo.php', {t:'TBL02_PRODUTO', e:lg.TBL01_ID}, function (a) {
             formMovimentacao.addOptionsSelect('TBL04_ID_PRODUTO', a);
-			
-			// combo fornecedor
-			myApp.c.ajaxApi ('combo.php', {t:'TBL03_FORNECEDOR', e:lg.TBL01_ID}, function (a) {
-				formMovimentacao.addOptionsSelect('TBL04_ID_FORNECEDOR', a);
-					
-				// listview movimentacao
-				myApp.c.listView ('movimentacaoList.php', lg, 'movimentacao', function (a) { 
-					// @TODO add opcao de desativacao da movimentacao
-				}, false, true);
-			});
+
+                // combo fornecedor
+                myApp.c.ajaxApi ('combo.php', {t:'TBL03_FORNECEDOR', e:lg.TBL01_ID}, function (a) {
+                    formMovimentacao.addOptionsSelect('TBL04_ID_FORNECEDOR', a);
+
+                    // listview movimentacao
+                    myApp.c.listView ('movimentacaoList.php', lg, 'movimentacao', function (a) { 
+                        // @TODO add opcao de desativacao da movimentacao
+                    }, false, true);
+                });
         });
 
         // acoes do modal-form
@@ -49,10 +51,17 @@ class LoadPage {
             myApp.c.closeModal('modalFormMovimentacao');
         });
 
+        // evento change na data - fecha o calendario ao selecionar a data
+        $$(formMovimentacao.TBL04_DATA).on('change', function () {
+            myApp.c.calendar.TBL04_DATA.close('slow'); 
+        });
+
         // evento de submit do form
         $$(formMovimentacao.form).on('submit', function () {
             var formData = formMovimentacao.getFormData();
             myApp.c.ajaxApi ('movimentacaoSave.php', $.extend({TBL04_ID_EMPRESA: lg.TBL01_ID},formData), function (a) {
+                // nome do produto + nome do fornecedor
+                $.extend(a, {PRODUTO:$(formMovimentacao.TBL04_ID_PRODUTO).find(':selected').text(), FORNECEDOR:$(formMovimentacao.TBL04_ID_FORNECEDOR).find(':selected').text()});
                 // limpa o campo do form
                 formMovimentacao.clear();
                 // add o item na lista

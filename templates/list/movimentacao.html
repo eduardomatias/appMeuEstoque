@@ -1,6 +1,6 @@
 <div class="item-inner">
     <div class="item-title">
-        <i class="fa fa-arrow-circle-{{#if tipo}}up color-green{{else}}down color-red{{/if}}"></i> {{PRODUTO}} 
+        <i class="fa fa-arrow-circle-{{#js_if "this.TBL04_TIPO == 0"}}up color-green{{else}}down color-red{{/js_if}}"></i> {{PRODUTO}} 
         <br />
         <small>{{FORNECEDOR}}</small>
     </div>

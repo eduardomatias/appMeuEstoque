@@ -1,9 +1,17 @@
 <div class="item-inner">
     <div class="item-title">
-        {{produto}} 
+        {{PRODUTO}} 
         <br />
-        <small>
-			Qtd.: <strong {{#js_if "this.qtd < 10"}}class="color-red"{{/js_if}}>{{qtd}}</strong>
-		</small>
+        <small>Status:
+            {{#js_if "this.TBL02_ATIVO == 1"}}
+            <strong class="color-green">Ativo</strong>
+            {{else}} 
+            <strong class="color-red">Inativo</strong>
+            {{/js_if}}
+        </small>
+    </div>
+    <div class="item-after">
+        <span class="qtd-produto"><strong {{#js_if "this.QTD < 10"}}class="color-red"{{/js_if}}>{{QTD}}</strong></span>
+        <span class="vlr-produto {{#js_if "this.VALOR < 0"}}color-red{{else}}color-green{{/js_if}}">R$ {{real VALOR}}</span>
     </div>
 </div>

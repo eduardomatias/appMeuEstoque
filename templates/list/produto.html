@@ -3,12 +3,12 @@
         <i class="fa fa-inbox"></i> {{TBL02_NOME}}
         <br />
         <small>Status:
-			{{#js_if "this.TBL02_ATIVO == 1"}}
-				<strong class="color-green">Ativo</strong>
-			{{else}} 
-				<strong class="color-red">Inativo</strong>
-			{{/js_if}}
-		</small>
+            {{#js_if "this.TBL02_ATIVO == 1"}}
+            <strong class="color-green">Ativo</strong>
+            {{else}} 
+            <strong class="color-red">Inativo</strong>
+            {{/js_if}}
+        </small>
     </div>
     <div class="item-after">
         <a href="#" class="link action-editar-produto" data-produto='{"TBL02_ID":{{TBL02_ID}},"TBL02_NOME":"{{TBL02_NOME}}","TBL02_ATIVO":{{TBL02_ATIVO}}}'>
